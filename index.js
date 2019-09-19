@@ -1,34 +1,20 @@
+const express = require('express');
+const ps = require('./postgres-config');
 
-const { Client } = require('pg')
-const client = new Client({
-  user: "postgres",
-  password: "alijan",
-  host: "localhost",
-  port: 5433,
-  database: "ayako_class"
+const app = express();
+ps.connect();
+
+app.get('/api', (request, response) => {
+  response.send('Hi there! you did an api call');
 })
 
-connect();
+app.get('/api/books', (request, response) => {
+  client.query("SELECT * FROM books").then((result) => {
+    response.send(result.rows);
+  }).catch(err => {
+    console.log('error:', err);
+    response.send(err);
+  })
+})
 
-async function connect() {
-  try {
-    await client.connect();
-    const res = await client.query("SELECT * FROM students");
-    console.table(res.rows);
-    await client.end();  
-  } catch(err) {
-    console.log(err);
-  }
-}
-
-// client.connect().then(() => client.query('SELECT * FROM students'))
-// .then((res) => console.table(res.rows))
-// .catch(err => console.log(err))
-// .finally(() => client.end())
-
-// const { Client } = require('pg')
-// const client = new Client()
-// await client.connect()
-// const res = await client.query('SELECT * FROM people')
-// console.log(res) // Hello world!
-// await client.end()
+app.listen(5001, () => console.log('Server connected to localhost:5001'));
