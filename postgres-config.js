@@ -1,5 +1,8 @@
 
+//npm package to connnect postgres with node
 const pg = require('pg')
+
+//connecting to the database that we want to query
 const client = new pg.Client({
   user: "postgres",
   password: "alijan",
@@ -19,18 +22,17 @@ const client = new pg.Client({
 //   }
 // }
 
+
+// Initializer function to connect to the database
 function connect(){
   client.connect().then((res) => {
     console.log('Postgres connected on 5432!')
-    return client
   })
   .catch(err => console.log(err))
   // .finally(() => client.end())
-
 }
 
 module.exports = { connect, client }
-
 
 // const { Client } = require('pg')
 // const client = new Client()
