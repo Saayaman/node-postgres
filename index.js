@@ -9,7 +9,7 @@ app.get('/api', (request, response) => {
 })
 
 app.get('/api/books', (request, response) => {
-  client.query("SELECT * FROM books").then((result) => {
+  ps.client.query("SELECT * FROM books").then((result) => {
     response.send(result.rows);
   }).catch(err => {
     console.log('error:', err);

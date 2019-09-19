@@ -4,7 +4,7 @@ const client = new pg.Client({
   user: "postgres",
   password: "alijan",
   host: "localhost",
-  port: 5433,
+  port: 5432,
   database: "ayako_class"
 })
 
@@ -20,11 +20,14 @@ const client = new pg.Client({
 // }
 
 function connect(){
-  client.connect().then((res) => console.table(res.rows))
+  client.connect().then((res) => {
+    console.log('Postgres connected on 5432!')
+    return client
+  })
   .catch(err => console.log(err))
   // .finally(() => client.end())
-}
 
+}
 
 module.exports = { connect, client }
 
