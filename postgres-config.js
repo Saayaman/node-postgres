@@ -1,14 +1,22 @@
 
 //npm package to connnect postgres with node
-const pg = require('pg')
+const pg = require('pg');
+require('dotenv').config();
+
+const connectionString = process.env.NODE_ENV === 'staging'
+? process.env.DATABASE_URL : process.env.LOCAL_POSTGRES_DATABASE;
 
 //connecting to the database that we want to query
+// const client = new pg.Client({
+//   user: "postgres",
+//   password: "alijan",
+//   host: "localhost",
+//   port: 5432,
+//   database: "ayako_class"
+// })
+
 const client = new pg.Client({
-  user: "postgres",
-  password: "alijan",
-  host: "localhost",
-  port: 5432,
-  database: "ayako_class"
+  connectionString: connectionString
 })
 
 // async function connect() {

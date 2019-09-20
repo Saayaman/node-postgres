@@ -10,7 +10,7 @@ const app = express();
 // initilized postgres
 ps.connect();
 
-app.use(cors)
+// app.use(cors)
 
 //body parser
 app.use(express.json());
@@ -52,4 +52,5 @@ app.post('/api/books', (request, response) => {
 })
 
 //Connect to localhost for express
-app.listen(5001, () => console.log('Server connected to localhost:5001'));
+app.listen(5001, () => console.log('Server connected to localhost:5001'))
+.on('error', console.log);
