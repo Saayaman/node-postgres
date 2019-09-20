@@ -1,14 +1,19 @@
 
 //npm package to connnect postgres with node
 const pg = require('pg')
-require('dotenv').config();
 
 //connecting to the database that we want to query
 
 // 1st way: using URI
-const connectionString = process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL : process.env.POSTGRES_URI;
+require('dotenv').config();
+
+// const client = new pg.Client({
+//   connectionString: process.env.POSTGRES_URI,
+// })
+
+
 const client = new pg.Client({
-  connectionString: connectionString,
+  connectionString: process.env.NODE_ENV === 'production' ? process.env.DATABASE_URL : process.env.POSTGRES_URI,
 })
 
 // 2nd way: using object
