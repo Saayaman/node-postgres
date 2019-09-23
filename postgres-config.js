@@ -40,7 +40,7 @@ function connect(){
   // .finally(() => client.end())
 }
 
-module.exports = { end, connect, client }
+module.exports = { connect, client }
 
 // const { Client } = require('pg')
 // const client = new Client()
