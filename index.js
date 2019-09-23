@@ -12,7 +12,7 @@ const app = express();
 ps.connect();
 
 // if (process.env.NODE_ENV !== 'staging') {
-//   app.use(cors)
+  app.use(cors);
 // }
 
 //body parser
