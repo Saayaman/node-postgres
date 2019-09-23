@@ -11,9 +11,9 @@ const app = express();
 // initilized postgres
 ps.connect();
 
-if (process.env.NODE_ENV !== 'staging') {
-  app.use(cors)
-}
+// if (process.env.NODE_ENV !== 'staging') {
+//   app.use(cors)
+// }
 
 //body parser
 app.use(express.json());
@@ -21,12 +21,14 @@ app.use(express.urlencoded({ extended: false })); // using querystring instead o
 
 // API 1 
 app.get('/api', (request, response) => {
+  response.header("Access-Control-Allow-Origin", '*');
   //setting the reponse when people access localhost:5001/api
   response.send('Hi there! you did an api call');
 })
 
 // API 2
 app.get('/api/books', (request, response) => {
+  response.header("Access-Control-Allow-Origin", '*');
   ps.client.query("SELECT * FROM books").then((result) => {
     response.send(result.rows);
   }).catch(err => {
