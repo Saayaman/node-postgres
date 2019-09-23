@@ -51,6 +51,8 @@ app.post('/api/books', (request, response) => {
   })
 })
 
+const PORT = process.env.PORT || 5001;
+
 //Connect to localhost for express
-app.listen(5001, () => console.log('Server connected to localhost:5001'))
+app.listen(PORT, () => console.log(`Server connected to localhost:${PORT}`))
 .on('error', console.log);
