@@ -11,9 +11,9 @@ const app = express();
 // initilized postgres
 ps.connect();
 
-// if (process.env.NODE_ENV === 'staging') {
-//   app.use(cors)
-// }
+if (process.env.NODE_ENV !== 'staging') {
+  app.use(cors)
+}
 
 //body parser
 app.use(express.json());
