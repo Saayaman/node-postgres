@@ -19,4 +19,6 @@ $ `npm install`
 2. Start Proect with nodemon
 $ `npm run dev`
 
+your project should start on localhost:5001
+
 3. Start Coding!
