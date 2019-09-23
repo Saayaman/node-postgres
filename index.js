@@ -1,6 +1,7 @@
 const express = require('express');
 const ps = require('./postgres-config');
 const cors = require('cors');
+require('dotenv').config();
 
 // In this file we...
 
@@ -10,7 +11,9 @@ const app = express();
 // initilized postgres
 ps.connect();
 
-// app.use(cors)
+if (process.env.NODE_ENV !== 'staging') {
+  app.use(cors)
+}
 
 //body parser
 app.use(express.json());
