@@ -11,7 +11,7 @@ const app = express();
 // initilized postgres
 ps.connect();
 
-if (process.env.NODE_ENV !== 'staging') {
+if (process.env.NODE_ENV === 'staging') {
   app.use(cors)
 }
 
@@ -41,12 +41,15 @@ app.post('/api/books', (request, response) => {
   const author = request.body.author;
   const title = request.body.title;
 
-  const query = 'INSERT INTO books (author, title) VALUES (\'' + author + '\',\'' + title + '\')'
+  // const query = 'INSERT INTO books (author, title) VALUES (\'' + author + '\',\'' + title + '\')'
+  const query = 'INSERT INTO books (author, title) VALUES ($1, $2)';
+  const params = [author, title];
+
 
   console.log(query);
 
   // response is what you return as a result
-  ps.client.query(query).then((result) => {
+  ps.client.query(query, params).then((result) => {
     response.send(result.rows);
   }).catch(err => {
     console.log('error:', err);
